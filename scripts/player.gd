@@ -112,10 +112,15 @@ func do_dash(input_direction: Vector2, delta: float) -> void:
 	elif input_direction.x > 0: current_horizontal_direction = 1
 
 	if Input.is_action_just_pressed("dash") and not is_dashing and not crouching and (is_on_floor() or air_dashes > 0):
-		if current_horizontal_direction == sign(current_dash_velocity.x):
+		var dash_direction: Vector2 = input_direction.normalized()
+		if dash_direction == Vector2.ZERO:
+			dash_direction = Vector2(last_horizontal_direction, 0)
+		
+		if sign(dash_direction.x) == sign(current_dash_velocity.x):
 			current_dash_velocity.x += dash_velocity * current_horizontal_direction
 		else:
 			current_dash_velocity.x = dash_velocity * current_horizontal_direction
+
 		is_dashing = true
 		if not is_on_floor():
 			air_dashes -= 1
