@@ -20,10 +20,9 @@ var dash_deceleration: float:
 
 var air_dashes: int = 0
 var is_dashing: bool = false
-var current_dash_velocity: Vector2 = Vector2.ZERO
 var is_sliding: bool = false
 
-var last_direction: float = 1
+var last_horizontal_direction: float = 1
 
 var jump_init: bool = false
 
@@ -37,20 +36,53 @@ func _process(_delta: float) -> void:
 			Engine.time_scale = 1
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	else:
+	velocity = Vector2.ZERO
+
+	var input_direction: Vector2 = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
+
+	do_jump_logic()
+
+	do_gravity(delta)
+
+	if is_on_floor():
 		air_dashes = 1
 
+	do_crouch_and_slide_logic()
+
+	do_left_right_movement(input_direction)
+
+	do_dash(input_direction, delta)
+
+	cap_speed() # -------------------------------------------------------
+
+	flip_sprite_h()
+
+	set_animation()
+
+	set_ghost_emitter()
+
+	move_and_slide()
+
+var gravity_velocity: Vector2 = Vector2.ZERO
+func do_gravity(delta: float) -> void:
+	if not is_on_floor():
+		gravity_velocity += get_gravity() * delta
+	elif gravity_velocity.y > 0:
+		gravity_velocity.y = 0
+
+	velocity += gravity_velocity
+
+func do_jump_logic() -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
+		gravity_velocity.y = jump_velocity
 		jump_init = true
 	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y = max(velocity.y, jump_release_velocity_cutoff)
+		gravity_velocity.y = max(gravity_velocity.y, jump_release_velocity_cutoff)
 		jump_init = false
-	if velocity.y >= 0:
+	if gravity_velocity.y >= 0:
 		jump_init = false
 
+func do_crouch_and_slide_logic() -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor() and not jump_init and not is_dashing:
 		crouching = true
 	elif Input.is_action_just_pressed("crouch") and abs(current_dash_velocity.x) > speed:
@@ -64,22 +96,26 @@ func _physics_process(delta: float) -> void:
 	if is_sliding and current_dash_velocity.x == 0:
 		is_sliding = false
 
-	var direction: float = Input.get_axis("left", "right")
-	if direction and not is_dashing:
-		velocity.x = direction * (speed if not crouching else crouch_speed)
+func do_left_right_movement(input_direction: Vector2) -> void:
+	var left_right: float = 0
+	if input_direction.x and not is_dashing:
+		left_right = input_direction.x * (speed if not crouching else crouch_speed)
 	else:
-		velocity.x = 0
+		left_right = 0
+	
+	velocity.x += left_right
 
-	var current_direction: float = last_direction
-	if direction < 0: current_direction = -1
-	elif direction > 0: current_direction = 1
+var current_dash_velocity: Vector2 = Vector2.ZERO
+func do_dash(input_direction: Vector2, delta: float) -> void:
+	var current_horizontal_direction: float = last_horizontal_direction
+	if input_direction.x < 0: current_horizontal_direction = -1
+	elif input_direction.x > 0: current_horizontal_direction = 1
 
 	if Input.is_action_just_pressed("dash") and not is_dashing and not crouching and (is_on_floor() or air_dashes > 0):
-		
-		if current_direction == sign(current_dash_velocity.x):
-			current_dash_velocity.x += dash_velocity * current_direction
+		if current_horizontal_direction == sign(current_dash_velocity.x):
+			current_dash_velocity.x += dash_velocity * current_horizontal_direction
 		else:
-			current_dash_velocity.x = dash_velocity * current_direction
+			current_dash_velocity.x = dash_velocity * current_horizontal_direction
 		is_dashing = true
 		if not is_on_floor():
 			air_dashes -= 1
@@ -91,6 +127,9 @@ func _physics_process(delta: float) -> void:
 
 	velocity += current_dash_velocity
 
+	last_horizontal_direction = current_horizontal_direction
+
+func cap_speed() -> void:
 	if velocity.x > max_speed:
 		velocity.x = max_speed
 	if velocity.x < -max_speed:
@@ -100,11 +139,13 @@ func _physics_process(delta: float) -> void:
 	if velocity.y < -max_speed:
 			velocity.y = - max_speed
 
+func flip_sprite_h() -> void:
 	if velocity.x < 0:
 		sprite.flip_h = true
 	elif velocity.x > 0:
 		sprite.flip_h = false
 
+func set_animation() -> void:
 	var animation: StringName
 
 	if velocity.x != 0:
@@ -127,14 +168,11 @@ func _physics_process(delta: float) -> void:
 	if is_sliding:
 		animation = "slide"
 
+	if sprite.animation != animation:
+		sprite.play(animation)
+
+func set_ghost_emitter() -> void:
 	if abs(velocity.x) > speed:
 		ghost_emitter.emitting = true
 	else:
 		ghost_emitter.emitting = false
-	
-	if sprite.animation != animation:
-		sprite.play(animation)
-
-	move_and_slide()
-
-	last_direction = current_direction
