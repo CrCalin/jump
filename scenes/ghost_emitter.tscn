@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xo28wsyln55d"]
+
+[ext_resource type="Script" uid="uid://t46mvqp6iyj4" path="res://scripts/ghost_emitter.gd" id="1_8ce7w"]
+
+[node name="GhostEmitter" type="Node2D"]
+script = ExtResource("1_8ce7w")
