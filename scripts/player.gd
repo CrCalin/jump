@@ -260,3 +260,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.name == "StageEnd":
 		return
 	die()
+
+signal add_time_signal(time: float)
+func add_time(time: float) -> void:
+	add_time_signal.emit(time)

@@ -1,8 +1,8 @@
 extends Node2D
 
 var stages: Array[PackedScene] = [
-	#preload("res://scenes/stages/stage1.tscn"),
-	preload("res://scenes/stages/stage2.tscn"),
+	preload("res://scenes/stages/stage1.tscn"),
+	#preload("res://scenes/stages/stage2.tscn"),
 ]
 
 func _process(delta: float) -> void:
@@ -28,6 +28,8 @@ func debug_actions() -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if Input.is_action_just_pressed("reset_timer"):
+		(get_node("Timer") as Timer).start(30)
 
 const game_size: Vector2i = Vector2i(1024, 576);
 
@@ -76,12 +78,13 @@ var player_start_position: Vector2 = Vector2.ZERO
 var player_target_position: Vector2 = Vector2.ZERO
 @onready var camera: Camera2D = $Camera2D
 
-const transition_time: float = 2
+const transition_time: float = 1
 var transition_time_left: float = 0
 var transitioning: bool = false
 
 const initial_player_position_left: Vector2 = Vector2(64, 530)
 const initial_player_position_right: Vector2 = Vector2(960, 530) # janky hack, i dont care
+signal pause_timer()
 func start_stage_transition() -> void:
 	current_stage = get_node("CurrentStage")
 	transition_time_left = transition_time
@@ -89,6 +92,7 @@ func start_stage_transition() -> void:
 	player.movement_enabled = false
 	player_start_position = player.position
 	player_target_position = initial_player_position_left if current_stage_direction == -1 else initial_player_position_right
+	pause_timer.emit()
 	
 func do_transition(delta: float) -> void:
 	transition_time_left -= delta
@@ -104,6 +108,7 @@ func smootherstep(x: float) -> float:
 	if x >= 1: return 1
 	return 6 * (x ** 5) - 15 * (x ** 4) + 10 * (x ** 3) # smootherstep function from https://en.wikipedia.org/wiki/Smoothstep
 
+signal resume_timer()
 func end_transition() -> void:
 	current_stage.name = "OldStage"
 	current_stage.queue_free()
@@ -113,7 +118,4 @@ func end_transition() -> void:
 	transitioning = false
 	current_stage_direction = - current_stage_direction
 	player.movement_enabled = true
-
-
-######## TODO: Fix player position during and after the transition
-######## TODO: Fix the flickering at the end of the transition, likely from physics interpolation if i had to guess
+	resume_timer.emit()

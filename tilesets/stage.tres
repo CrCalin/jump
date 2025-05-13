@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bsb6n8m2kv7dj"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://bsb6n8m2kv7dj"]
 
 [ext_resource type="Texture2D" uid="uid://c4d1nsu206nd8" path="res://sprites/ground.png" id="1_m854v"]
 [ext_resource type="PackedScene" uid="uid://dnlxjswt1cdgn" path="res://scenes/jump_area.tscn" id="2_mjjcw"]
 [ext_resource type="PackedScene" uid="uid://rsei6q3a5hvr" path="res://scenes/dash_area.tscn" id="3_jdf2t"]
 [ext_resource type="PackedScene" uid="uid://dxap81nr83a8q" path="res://scenes/spike.tscn" id="4_w3rxh"]
 [ext_resource type="Texture2D" uid="uid://btdp7gcxdd6y" path="res://sprites/platforms.png" id="5_eedff"]
+[ext_resource type="PackedScene" uid="uid://ca6i8ixrkg8kk" path="res://scenes/timer_pickup.tscn" id="5_mjjcw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ekwrt"]
 texture = ExtResource("1_m854v")
@@ -40,6 +41,7 @@ texture_region_size = Vector2i(32, 32)
 scenes/1/scene = ExtResource("2_mjjcw")
 scenes/2/scene = ExtResource("3_jdf2t")
 scenes/3/scene = ExtResource("4_w3rxh")
+scenes/4/scene = ExtResource("5_mjjcw")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epwjk"]
 texture = ExtResource("5_eedff")
