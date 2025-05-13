@@ -29,15 +29,10 @@ func debug_actions() -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-@onready var game_size: Vector2i = get_viewport_rect().size
-
-func freak_out() -> void:
-	printerr("THE VIEWPORT SHOULD *NOT* BE CHANGING SIZE EVERRRRRRR")
+const game_size: Vector2i = Vector2i(1024, 576);
 
 func _ready() -> void:
 	load_stage_if_missing()
-
-	get_viewport().size_changed.connect(freak_out)
 
 var stage_id: int = -1
 var current_stage_direction: int = 1
@@ -56,7 +51,7 @@ func load_stage_if_missing() -> void:
 		(stage.get_node("StageEnd") as Area2D).area_entered.connect(change_stage)
 		add_child(stage)
 		current_stage_direction = 1
-		player.position = initial_player_position_left # + Vector2(0, 1024)
+		player.position = initial_player_position_left
 
 func change_stage(area: Area2D) -> void:
 	if area.get_parent() == null or area.get_parent().name != "Player": # janky hack, i dont care
@@ -100,7 +95,8 @@ func do_transition(delta: float) -> void:
 	if transition_time_left <= 0: return
 	var transition_progress_linear: float = 1 - (transition_time_left / transition_time)
 	var transition_progress_smooth: float = smootherstep(transition_progress_linear)
-	camera.position.y = game_size.y / 2.0 - game_size.y * transition_progress_smooth
+	current_stage.position.y = 0 + game_size.y * transition_progress_smooth
+	next_stage.position.y = - game_size.y + game_size.y * transition_progress_smooth
 	player.position = player_start_position * (1 - transition_progress_smooth) + player_target_position * (transition_progress_smooth)
 	
 func smootherstep(x: float) -> float:
@@ -115,9 +111,7 @@ func end_transition() -> void:
 	(next_stage.get_node("StageEnd") as Area2D).area_entered.connect(change_stage)
 	transition_time_left = 0
 	transitioning = false
-	next_stage.position.y += game_size.y
-	camera.position.y += game_size.y
-	player.position.y += game_size.y
+	current_stage_direction = - current_stage_direction
 	player.movement_enabled = true
 
 
