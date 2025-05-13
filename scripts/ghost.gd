@@ -10,8 +10,8 @@ static func _static_init() -> void:
 	CURVE.add_point(Vector2(0, 0.5))
 	CURVE.add_point(Vector2(1, 0))
 
-var max_time: float = 1
-var time_left: float = 1
+var max_time: float = 1 # just a random default value
+var time_left: float = 1 # just a random default value
 var curve: Curve = CURVE
 
 func _init(ghost_transform: Transform2D, flipped: bool, time: float, sprite: Texture2D, ghost_color: Color = Color.WHITE, curve_override: Curve = null) -> void:

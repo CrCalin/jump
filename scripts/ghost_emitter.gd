@@ -5,10 +5,10 @@ class_name GhostEmitter
 
 var emitting: bool = false
 
-var delta_time: float = 0.04
+const delta_time: float = 0.04
 var _current_time: float = delta_time
 
-var ghost_lifetime: float = 0.3
+const ghost_lifetime: float = 0.3
 
 var sprite_frames: SpriteFrames = null
 
