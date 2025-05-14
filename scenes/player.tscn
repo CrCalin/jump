@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cbofh1wjfed0p" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Material" uid="uid://ccbm2yt4t7uh2" path="res://shaders/outline_shader_material.tres" id="2_dqkch"]
 [ext_resource type="SpriteFrames" uid="uid://boc811k65nn44" path="res://animations/player.tres" id="3_tuyoq"]
-[ext_resource type="PackedScene" uid="uid://xo28wsyln55d" path="res://scenes/ghost_emitter.tscn" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://xo28wsyln55d" path="res://scenes/utility/ghost_emitter.tscn" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auc35"]
 radius = 8.0

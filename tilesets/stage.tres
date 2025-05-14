@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=10 format=3 uid="uid://bsb6n8m2kv7dj"]
 
 [ext_resource type="Texture2D" uid="uid://c4d1nsu206nd8" path="res://sprites/world/ground.png" id="1_mjjcw"]
-[ext_resource type="PackedScene" uid="uid://dnlxjswt1cdgn" path="res://scenes/jump_area.tscn" id="2_mjjcw"]
-[ext_resource type="PackedScene" uid="uid://rsei6q3a5hvr" path="res://scenes/dash_area.tscn" id="3_jdf2t"]
-[ext_resource type="PackedScene" uid="uid://dxap81nr83a8q" path="res://scenes/spike.tscn" id="4_w3rxh"]
-[ext_resource type="PackedScene" uid="uid://ca6i8ixrkg8kk" path="res://scenes/timer_pickup.tscn" id="5_mjjcw"]
+[ext_resource type="PackedScene" uid="uid://dnlxjswt1cdgn" path="res://scenes/world_objects/jump_area.tscn" id="2_mjjcw"]
+[ext_resource type="PackedScene" uid="uid://rsei6q3a5hvr" path="res://scenes/world_objects/dash_area.tscn" id="3_jdf2t"]
+[ext_resource type="PackedScene" uid="uid://dxap81nr83a8q" path="res://scenes/world_objects/spike.tscn" id="4_w3rxh"]
+[ext_resource type="PackedScene" uid="uid://ca6i8ixrkg8kk" path="res://scenes/world_objects/timer_pickup.tscn" id="5_mjjcw"]
 [ext_resource type="Texture2D" uid="uid://btdp7gcxdd6y" path="res://sprites/world/platforms.png" id="6_jdf2t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ekwrt"]

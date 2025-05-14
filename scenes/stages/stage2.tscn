@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://vd84uqce1we8"]
 
 [ext_resource type="TileSet" uid="uid://bsb6n8m2kv7dj" path="res://tilesets/stage.tres" id="1_n62lm"]
-[ext_resource type="PackedScene" uid="uid://6272hcicgdat" path="res://scenes/stage_end.tscn" id="2_jge6g"]
+[ext_resource type="PackedScene" uid="uid://6272hcicgdat" path="res://scenes/world_objects/stage_end.tscn" id="2_jge6g"]
 
 [node name="Stage2" type="TileMapLayer"]
 z_index = -1

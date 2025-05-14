@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://rsei6q3a5hvr"]
+[gd_scene load_steps=4 format=3 uid="uid://dnlxjswt1cdgn"]
 
-[ext_resource type="Script" uid="uid://b0g4sic6t7oy7" path="res://scripts/dash_area.gd" id="1_lotwp"]
-[ext_resource type="Texture2D" uid="uid://c0pmpun55asnd" path="res://sprites/world_items/dash_icon.png" id="2_2c1vy"]
+[ext_resource type="Script" uid="uid://ymrc28ssi7ig" path="res://scripts/jump_area.gd" id="1_1x2nw"]
+[ext_resource type="Texture2D" uid="uid://c58any3fpxnkr" path="res://sprites/world_objects/jump_icon.png" id="2_1x2nw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1x2nw"]
 radius = 11.0
 
-[node name="DashArea" type="Area2D"]
-script = ExtResource("1_lotwp")
+[node name="JumpArea" type="Area2D"]
+script = ExtResource("1_1x2nw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1x2nw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_2c1vy")
+texture = ExtResource("2_1x2nw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
