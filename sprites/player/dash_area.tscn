@@ -1,20 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://rsei6q3a5hvr"]
 
-[ext_resource type="Script" uid="uid://b0g4sic6t7oy7" path="res://scripts/dash_area.gd" id="1_8nxnr"]
-[ext_resource type="Texture2D" uid="uid://btce0j1jfl5c2" path="res://sprites/circle_2.png" id="2_8nxnr"]
+[ext_resource type="Script" uid="uid://b0g4sic6t7oy7" path="res://scripts/dash_area.gd" id="1_lotwp"]
+[ext_resource type="Texture2D" uid="uid://c0pmpun55asnd" path="res://sprites/dash_icon.png" id="2_2c1vy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1x2nw"]
 radius = 11.0
 
 [node name="DashArea" type="Area2D"]
-script = ExtResource("1_8nxnr")
+script = ExtResource("1_lotwp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1x2nw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_8nxnr")
+texture = ExtResource("2_2c1vy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

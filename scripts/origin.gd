@@ -29,7 +29,7 @@ func debug_actions() -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("reset_timer"):
-		(get_node("Timer") as Timer).start(30)
+		(get_node("Timer") as Timer).start(3)
 
 const game_size: Vector2i = Vector2i(1024, 576);
 

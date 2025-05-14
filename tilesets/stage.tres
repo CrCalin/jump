@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4d1nsu206nd8" path="res://sprites/ground.png" id="1_m854v"]
 [ext_resource type="PackedScene" uid="uid://dnlxjswt1cdgn" path="res://scenes/jump_area.tscn" id="2_mjjcw"]
-[ext_resource type="PackedScene" uid="uid://rsei6q3a5hvr" path="res://scenes/dash_area.tscn" id="3_jdf2t"]
+[ext_resource type="PackedScene" uid="uid://rsei6q3a5hvr" path="res://sprites/player/dash_area.tscn" id="3_jdf2t"]
 [ext_resource type="PackedScene" uid="uid://dxap81nr83a8q" path="res://scenes/spike.tscn" id="4_w3rxh"]
 [ext_resource type="Texture2D" uid="uid://btdp7gcxdd6y" path="res://sprites/platforms.png" id="5_eedff"]
 [ext_resource type="PackedScene" uid="uid://ca6i8ixrkg8kk" path="res://scenes/timer_pickup.tscn" id="5_mjjcw"]

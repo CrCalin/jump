@@ -7,6 +7,10 @@ func _ready() -> void:
 	start(30)
 
 func _process(_delta: float) -> void:
+	set_color()
+	set_text()
+
+func set_text() -> void:
 	var minutes: int = int(time_left / 60)
 	var seconds: int = int(time_left) - minutes * 60
 	var milliseconds: int = int((time_left - seconds - minutes * 60) * 1000)
@@ -26,6 +30,12 @@ func _process(_delta: float) -> void:
 	timer_text += str(milliseconds)
 	text.text = timer_text
 
+func set_color() -> void:
+	if time_left >= 5:
+		text.add_theme_color_override("default_color", Color8(255, 255, 255))
+	else:
+		var new_color: int = int(time_left / 5 * 255)
+		text.add_theme_color_override("default_color", Color8(255, new_color, new_color))
 
 func _on_timeout() -> void:
 	print('timeout')
