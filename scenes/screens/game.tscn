@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6wn33katc0y5"]
+[gd_scene load_steps=13 format=3 uid="uid://b6wn33katc0y5"]
 
 [ext_resource type="Script" uid="uid://c5gb6xb3lnn8q" path="res://scripts/origin.gd" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://btvq3l3hf0hau" path="res://scenes/player.tscn" id="2_vtaks"]
@@ -8,8 +8,10 @@
 [ext_resource type="Script" uid="uid://0uw7f3ot6rer" path="res://scripts/heart_container.gd" id="6_trtic"]
 [ext_resource type="Texture2D" uid="uid://dgktivuk8b8ri" path="res://sprites/ui/heart_full.png" id="7_ir15t"]
 [ext_resource type="Script" uid="uid://dsg8q68moxyrl" path="res://scripts/timer.gd" id="8_ca42v"]
+[ext_resource type="AudioStream" uid="uid://brnj0oe76c8wo" path="res://sounds/power_up.wav" id="8_ggwlb"]
 [ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="9_rysoc"]
 [ext_resource type="Script" uid="uid://dur5tao7lapur" path="res://scripts/score_label.gd" id="10_vtaks"]
+[ext_resource type="AudioStream" uid="uid://cmqe71qqeuwtb" path="res://sounds/coin.wav" id="11_e0wmo"]
 
 [node name="Origin" type="Node2D"]
 script = ExtResource("1_0tnpc")
@@ -65,6 +67,11 @@ layout_mode = 2
 texture = ExtResource("7_ir15t")
 expand_mode = 2
 
+[node name="HeartAudioPlayer" type="AudioStreamPlayer" parent="UILayer/HeartContainer"]
+unique_name_in_owner = true
+stream = ExtResource("8_ggwlb")
+volume_db = -20.0
+
 [node name="Timer" type="Timer" parent="UILayer"]
 unique_name_in_owner = true
 script = ExtResource("8_ca42v")
@@ -84,6 +91,11 @@ bbcode_enabled = true
 text = "00:00.000"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TimerAudioPlayer" type="AudioStreamPlayer" parent="UILayer/Timer"]
+unique_name_in_owner = true
+stream = ExtResource("11_e0wmo")
+volume_db = -20.0
 
 [node name="ScoreLabel" type="RichTextLabel" parent="UILayer"]
 unique_name_in_owner = true

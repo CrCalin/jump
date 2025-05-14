@@ -29,5 +29,7 @@ func set_lives(new_value: int) -> bool: # returns true if the player has reached
 func decrement_lives() -> bool: # returns true if the player has reached 0 lives
 	return set_lives(lives - 1)
 
+@onready var heart_audio_player: AudioStreamPlayer = %HeartAudioPlayer
 func increment_lives() -> bool: # returns true if the player has reached 0 lives
+	heart_audio_player.play()
 	return set_lives(lives + 1)

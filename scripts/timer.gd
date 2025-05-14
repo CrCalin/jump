@@ -37,7 +37,9 @@ func set_color() -> void:
 		var new_color: int = int(time_left / 5 * 255)
 		text.add_theme_color_override("default_color", Color8(255, new_color, new_color))
 
+@onready var timer_audio_player: AudioStreamPlayer = %TimerAudioPlayer
 func _on_add_time_signal(time: float) -> void:
+	timer_audio_player.play()
 	start(time_left + time)
 
 func _on_pause_timer() -> void:

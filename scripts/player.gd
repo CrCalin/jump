@@ -125,10 +125,12 @@ func do_jump_logic(delta: float) -> void:
 	if gravity_velocity.y >= 0:
 		jump_init = false
 
+@onready var jump_audio_player: AudioStreamPlayer = %JumpAudioPlayer
 func jump() -> void:
 	gravity_velocity.y = jump_velocity
 	jump_init = true
 	jumped_recently_timer = max_coyote_time
+	jump_audio_player.play()
 
 func do_crouch_and_slide_logic() -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor() and not jump_init and not is_dashing:
@@ -169,6 +171,8 @@ func can_dash() -> bool:
 	return false
 
 var current_dash_velocity: Vector2 = Vector2.ZERO
+
+@onready var dash_audio_player: AudioStreamPlayer = %DashAudioPlayer
 func do_dash(input_direction: Vector2, delta: float) -> void:
 	var current_horizontal_direction: float = last_horizontal_direction
 	if input_direction.x < 0: current_horizontal_direction = -1
@@ -185,8 +189,8 @@ func do_dash(input_direction: Vector2, delta: float) -> void:
 			current_dash_velocity.x = dash_velocity * current_horizontal_direction
 
 		gravity_velocity = Vector2.ZERO
-
 		is_dashing = true
+		dash_audio_player.play()
 	if current_dash_velocity.x != 0:
 		current_dash_velocity.x -= dash_deceleration * sign(current_dash_velocity.x) * delta
 		if is_on_wall():
@@ -259,12 +263,14 @@ signal pause_timer()
 signal resume_timer()
 signal shake_camera()
 @onready var heart_container: HeartContainer = %HeartContainer
+@onready var death_audio_player: AudioStreamPlayer = %DeathAudioPlayer
 func die() -> void:
 	if dead == true: return
 	movement_enabled = false
 	dead = true
 	pause_timer.emit()
 	shake_camera.emit()
+	death_audio_player.play()
 	if not heart_container.decrement_lives(): # we still have lives
 		sprite.animation_finished.connect(respawn)
 
