@@ -258,16 +258,14 @@ var dead: bool = false
 signal pause_timer()
 signal resume_timer()
 signal shake_camera()
-@onready var heart_container: HeartContainer = $"../HeartContainer"
-signal game_over()
+@onready var heart_container: HeartContainer = %HeartContainer
 func die() -> void:
+	if dead == true: return
 	movement_enabled = false
 	dead = true
 	pause_timer.emit()
 	shake_camera.emit()
-	if heart_container.decrement_lives(): # we died for good
-		game_over.emit()
-	else: # we still have lives
+	if not heart_container.decrement_lives(): # we still have lives
 		sprite.animation_finished.connect(respawn)
 
 var checkpoint: Vector2 = Origin.initial_player_position_left

@@ -1,0 +1,114 @@
+[gd_scene load_steps=11 format=3 uid="uid://b6wn33katc0y5"]
+
+[ext_resource type="Script" uid="uid://c5gb6xb3lnn8q" path="res://scripts/origin.gd" id="1_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://btvq3l3hf0hau" path="res://scenes/player.tscn" id="2_vtaks"]
+[ext_resource type="Script" uid="uid://xjk6m6vi6a7i" path="res://scripts/camera.gd" id="3_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://coaw8tf56au8c" path="res://sprites/world/stage_background.png" id="4_dinhu"]
+[ext_resource type="Texture2D" uid="uid://ckkv70fdmpwv5" path="res://sprites/world/exterior_background.png" id="5_kvuet"]
+[ext_resource type="Script" uid="uid://0uw7f3ot6rer" path="res://scripts/heart_container.gd" id="6_trtic"]
+[ext_resource type="Texture2D" uid="uid://dgktivuk8b8ri" path="res://sprites/ui/heart_full.png" id="7_ir15t"]
+[ext_resource type="Script" uid="uid://dsg8q68moxyrl" path="res://scripts/timer.gd" id="8_ca42v"]
+[ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="9_rysoc"]
+[ext_resource type="Script" uid="uid://dur5tao7lapur" path="res://scripts/score_label.gd" id="10_vtaks"]
+
+[node name="Origin" type="Node2D"]
+script = ExtResource("1_0tnpc")
+
+[node name="Player" parent="." instance=ExtResource("2_vtaks")]
+z_index = 2
+position = Vector2(960, 530)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(512, 288)
+process_callback = 0
+script = ExtResource("3_kvpfn")
+
+[node name="StageBackground" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(512, 288)
+scale = Vector2(1024, 576)
+texture = ExtResource("4_dinhu")
+
+[node name="ExteriorBackground" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(512, 288)
+scale = Vector2(1228.8, 713.728)
+texture = ExtResource("5_kvuet")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HeartContainer" type="HBoxContainer" parent="UILayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -358.0
+offset_top = 5.0
+offset_right = -170.0
+offset_bottom = 65.0
+grow_horizontal = 2
+script = ExtResource("6_trtic")
+
+[node name="Heart0" type="TextureRect" parent="UILayer/HeartContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("7_ir15t")
+expand_mode = 2
+
+[node name="Heart1" type="TextureRect" parent="UILayer/HeartContainer"]
+layout_mode = 2
+texture = ExtResource("7_ir15t")
+expand_mode = 3
+
+[node name="Heart2" type="TextureRect" parent="UILayer/HeartContainer"]
+layout_mode = 2
+texture = ExtResource("7_ir15t")
+expand_mode = 2
+
+[node name="Timer" type="Timer" parent="UILayer"]
+unique_name_in_owner = true
+script = ExtResource("8_ca42v")
+
+[node name="Text" type="RichTextLabel" parent="UILayer/Timer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_right = 148.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("9_rysoc")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "00:00.000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="RichTextLabel" parent="UILayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 167.0
+offset_top = 12.0
+offset_right = 369.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("9_rysoc")
+theme_override_font_sizes/normal_font_size = 24
+text = "SCORE: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_vtaks")
+
+[connection signal="increment_score" from="." to="UILayer/ScoreLabel" method="increment_score"]
+[connection signal="pause_timer" from="." to="UILayer/Timer" method="_on_pause_timer"]
+[connection signal="resume_timer" from="." to="UILayer/Timer" method="_on_resume_timer"]
+[connection signal="add_time_signal" from="Player" to="UILayer/Timer" method="_on_add_time_signal"]
+[connection signal="pause_timer" from="Player" to="UILayer/Timer" method="_on_pause_timer"]
+[connection signal="resume_timer" from="Player" to="UILayer/Timer" method="_on_resume_timer"]
+[connection signal="shake_camera" from="Player" to="Camera2D" method="shake"]
+[connection signal="game_over" from="UILayer/HeartContainer" to="." method="_on_game_over"]
+[connection signal="game_over" from="UILayer/HeartContainer" to="Player" method="die"]
+[connection signal="timeout" from="UILayer/Timer" to="UILayer/HeartContainer" method="set_lives" binds= [0]]

@@ -30,7 +30,7 @@ func debug_actions() -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("reset_timer"):
-		(get_node("Timer") as Timer).start(3)
+		(get_node("%Timer") as Timer).start(3)
 
 const game_size: Vector2i = Vector2i(1024, 576);
 
@@ -85,6 +85,7 @@ var transitioning: bool = false
 const initial_player_position_left: Vector2 = Vector2(64, 530)
 const initial_player_position_right: Vector2 = Vector2(960, 530) # janky hack, i dont care
 signal pause_timer()
+signal increment_score()
 func start_stage_transition() -> void:
 	current_stage = get_node("CurrentStage")
 	transition_time_left = transition_time
@@ -93,6 +94,7 @@ func start_stage_transition() -> void:
 	player_start_position = player.position
 	player_target_position = initial_player_position_left if current_stage_direction == -1 else initial_player_position_right
 	pause_timer.emit()
+	increment_score.emit()
 	
 func do_transition(delta: float) -> void:
 	transition_time_left -= delta
@@ -120,3 +122,9 @@ func end_transition() -> void:
 	player.checkpoint = player.position
 	player.movement_enabled = true
 	resume_timer.emit()
+
+const game_over_scene: PackedScene = preload("uid://b8riyhh7x50sd")
+func _on_game_over() -> void:
+	var game_over_object: Control = game_over_scene.instantiate()
+	(game_over_object.get_node("%ScoreLabel") as RichTextLabel).text = "SCORE: " + str((get_node("%ScoreLabel") as ScoreLabel).score)
+	get_node("UILayer").add_child(game_over_object)

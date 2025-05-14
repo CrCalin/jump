@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/font1.png-1afcd615dbb1191566d4dfe8a3a208bb.fo
 
 [params]
 
-character_ranges=PackedStringArray("\'A\'-\'Z\'", "\']\'-\'`\'", "\'0\'-\'9\'", "\'.\'", "\',\'", "\':\'", "\'?\'", "\'!\'", "\'(\'-\')\'", "\'+\'", "\'-\'")
+character_ranges=PackedStringArray("\'A\'-\'Z\'", "32", "\'^\'-\'`\'", "\'0\'-\'9\'", "\'.\'", "\',\'", "\':\'", "\'?\'", "\'!\'", "\'(\'-\')\'", "\'+\'", "\'-\'")
 kerning_pairs=PackedStringArray()
 columns=10
 rows=5
@@ -20,7 +20,6 @@ image_margin=Rect2i(0, 0, 0, 0)
 character_margin=Rect2i(0, 0, 0, 0)
 ascent=0
 descent=0
-fallbacks=[Object(SystemFont,"resource_local_to_scene":false,"resource_name":"","fallbacks":Array[Font]([]),"font_names":PackedStringArray(),"font_italic":false,"font_weight":400,"font_stretch":100,"antialiasing":1,"generate_mipmaps":false,"disable_embedded_bitmaps":true,"allow_system_fallback":true,"force_autohinter":false,"hinting":1,"subpixel_positioning":1,"keep_rounding_remainders":true,"multichannel_signed_distance_field":false,"msdf_pixel_range":16,"msdf_size":48,"oversampling":0.0,"script":null)
-]
+fallbacks=[]
 compress=true
 scaling_mode=2
