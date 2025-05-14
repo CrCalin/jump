@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b8riyhh7x50sd"]
 
-[ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="1_xeevv"]
+[ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="1_mqkc1"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -53,7 +53,7 @@ layout_mode = 2
 [node name="YouLostLabel" type="RichTextLabel" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
-theme_override_fonts/normal_font = ExtResource("1_xeevv")
+theme_override_fonts/normal_font = ExtResource("1_mqkc1")
 theme_override_font_sizes/normal_font_size = 28
 text = "YOU LOST!"
 fit_content = true
@@ -64,7 +64,7 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/normal_font = ExtResource("1_xeevv")
+theme_override_fonts/normal_font = ExtResource("1_mqkc1")
 text = "SCORE: 0"
 fit_content = true
 horizontal_alignment = 1
@@ -73,7 +73,7 @@ vertical_alignment = 1
 [node name="RestartButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_fonts/font = ExtResource("1_mqkc1")
 theme_override_font_sizes/font_size = 24
 text = "RESTART
 "
@@ -82,7 +82,7 @@ text = "RESTART
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/line_spacing = 4
-theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_fonts/font = ExtResource("1_mqkc1")
 theme_override_font_sizes/font_size = 24
 text = "BACK TO
 TITLE"
