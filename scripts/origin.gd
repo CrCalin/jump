@@ -1,4 +1,5 @@
 extends Node2D
+class_name Origin
 
 var stages: Array[PackedScene] = [
 	preload("res://scenes/stages/stage1.tscn"),
@@ -49,7 +50,6 @@ func load_stage_if_missing() -> void:
 		var id: int = randi_range(0, stages.size() - 1)
 		var stage: TileMapLayer = stages[id].instantiate()
 		stage.name = "CurrentStage"
-		print(stage.get_node("StageEnd"))
 		(stage.get_node("StageEnd") as Area2D).area_entered.connect(change_stage)
 		add_child(stage)
 		current_stage_direction = 1
@@ -117,5 +117,6 @@ func end_transition() -> void:
 	transition_time_left = 0
 	transitioning = false
 	current_stage_direction = - current_stage_direction
+	player.checkpoint = player.position
 	player.movement_enabled = true
 	resume_timer.emit()

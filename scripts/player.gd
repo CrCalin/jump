@@ -36,7 +36,9 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
 	
 	if not movement_enabled:
-		set_animation("jump_ascend")
+		gravity_velocity = Vector2.ZERO
+		current_dash_velocity = Vector2.ZERO
+		set_animation("jump_ascend" if not dead else "dead")
 		set_ghost_emitter(true, false)
 		move_and_slide()
 		return
@@ -95,8 +97,7 @@ func can_jump() -> bool:
 		return false
 
 func do_jump_logic(delta: float) -> void:
-	sprite.self_modulate = Color(coyote_time / max_coyote_time, coyote_time / max_coyote_time, coyote_time / max_coyote_time)
-
+	#sprite.self_modulate = Color(coyote_time / max_coyote_time, coyote_time / max_coyote_time, coyote_time / max_coyote_time)
 	if coyote_time > 0:
 		coyote_time -= delta
 		if coyote_time < 0:
@@ -190,9 +191,9 @@ func do_dash(input_direction: Vector2, delta: float) -> void:
 		current_dash_velocity.x -= dash_deceleration * sign(current_dash_velocity.x) * delta
 		if is_on_wall():
 			current_dash_velocity.x = 0
-		if current_dash_velocity.x * sign(current_dash_velocity.x) <= speed:
-			is_dashing = false
-			current_dash_velocity.x = 0
+	if current_dash_velocity.x * sign(current_dash_velocity.x) <= speed:
+		is_dashing = false
+		current_dash_velocity.x = 0
 
 	velocity += current_dash_velocity
 
@@ -253,8 +254,29 @@ func set_ghost_emitter(override: bool = false, value: bool = false) -> void:
 	else:
 		ghost_emitter.emitting = false
 
+var dead: bool = false
+signal pause_timer()
+signal resume_timer()
+signal shake_camera()
+@onready var heart_container: HeartContainer = $"../HeartContainer"
+signal game_over()
 func die() -> void:
-	queue_free()
+	movement_enabled = false
+	dead = true
+	pause_timer.emit()
+	shake_camera.emit()
+	if heart_container.decrement_lives(): # we died for good
+		game_over.emit()
+	else: # we still have lives
+		sprite.animation_finished.connect(respawn)
+
+var checkpoint: Vector2 = Origin.initial_player_position_left
+func respawn() -> void:
+	position = checkpoint
+	movement_enabled = true
+	dead = false
+	resume_timer.emit()
+	sprite.animation_finished.disconnect(respawn)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "StageEnd":

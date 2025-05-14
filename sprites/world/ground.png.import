@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0pmpun55asnd"
-path="res://.godot/imported/dash_icon.png-65b5cbad507a2b63824e26f619557291.ctex"
+uid="uid://c4d1nsu206nd8"
+path="res://.godot/imported/ground.png-6289ac41fadb93191761d6fec3984c37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dash_icon.png"
-dest_files=["res://.godot/imported/dash_icon.png-65b5cbad507a2b63824e26f619557291.ctex"]
+source_file="res://sprites/world/ground.png"
+dest_files=["res://.godot/imported/ground.png-6289ac41fadb93191761d6fec3984c37.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca6i8ixrkg8kk"]
 
 [ext_resource type="Script" uid="uid://0ay3pdf7mg0h" path="res://scripts/timer_pickup.gd" id="1_q0m6q"]
-[ext_resource type="Texture2D" uid="uid://doi2dgwe6pg5f" path="res://sprites/timer.png" id="2_eqpce"]
+[ext_resource type="Texture2D" uid="uid://doi2dgwe6pg5f" path="res://sprites/world_items/timer.png" id="2_eqpce"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1x2nw"]
 radius = 14.0
