@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6272hcicgdat"]
 
-[ext_resource type="Texture2D" uid="uid://ch3ti7ts6qtg4" path="res://icon.svg" id="1_lbaey"]
+[ext_resource type="Texture2D" uid="uid://bahj2p1abde6s" path="res://sprites/world_objects/stage_end.png" id="1_xpt6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66pxr"]
 size = Vector2(64, 32)
@@ -11,5 +11,4 @@ size = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_66pxr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.500955, 0.25)
-texture = ExtResource("1_lbaey")
+texture = ExtResource("1_xpt6o")
