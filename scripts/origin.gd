@@ -2,8 +2,8 @@ extends Node2D
 class_name Origin
 
 var stages: Array[PackedScene] = [
-	preload("res://scenes/stages/stage1.tscn"),
-	#preload("res://scenes/stages/stage2.tscn"),
+	load("uid://cvohhxtn70wyt"),
+	#load("res://scenes/stages/stage2.tscn"),
 ]
 
 func _process(delta: float) -> void:
@@ -123,7 +123,7 @@ func end_transition() -> void:
 	player.movement_enabled = true
 	resume_timer.emit()
 
-const game_over_scene: PackedScene = preload("uid://b8riyhh7x50sd")
+var game_over_scene: PackedScene = load("uid://b8riyhh7x50sd")
 func _on_game_over() -> void:
 	var game_over_object: Control = game_over_scene.instantiate()
 	(game_over_object.get_node("%ScoreLabel") as RichTextLabel).text = "SCORE: " + str((get_node("%ScoreLabel") as ScoreLabel).score)

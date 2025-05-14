@@ -1,0 +1,163 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfmecmiirtbry"]
+
+[ext_resource type="Texture2D" uid="uid://coaw8tf56au8c" path="res://sprites/world/stage_background.png" id="1_hkmfp"]
+[ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="2_grxkj"]
+[ext_resource type="Texture2D" uid="uid://c0pmpun55asnd" path="res://sprites/world_objects/dash_icon.png" id="3_2pmk5"]
+[ext_resource type="Texture2D" uid="uid://c58any3fpxnkr" path="res://sprites/world_objects/jump_icon.png" id="4_1vsev"]
+[ext_resource type="Texture2D" uid="uid://bec3hgeloas2s" path="res://sprites/world/spike.png" id="5_8wpgk"]
+[ext_resource type="Texture2D" uid="uid://doi2dgwe6pg5f" path="res://sprites/world_objects/timer.png" id="6_830j8"]
+[ext_resource type="Texture2D" uid="uid://dgktivuk8b8ri" path="res://sprites/ui/heart_full.png" id="7_6oe0h"]
+[ext_resource type="Script" uid="uid://ude3chdluoji" path="res://scripts/back_to_main_menu_button.gd" id="8_4lgfo"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(512, 288)
+scale = Vector2(1024, 576)
+texture = ExtResource("1_hkmfp")
+
+[node name="Controls" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 42.0
+offset_right = 532.0
+offset_bottom = 240.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 24
+text = "CONTROLS:
+    A - LEFT
+    D - RIGHT
+
+    S - CROUCH (OR SLIDE)
+
+SPACE - JUMP
+    L - DASH
+"
+
+[node name="JumpAndDashPad" type="Node" parent="."]
+
+[node name="JumpAndDashPadLabel" type="RichTextLabel" parent="JumpAndDashPad"]
+offset_left = 41.0
+offset_top = 296.0
+offset_right = 433.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 20
+text = "THIS IS A JUMP PAD, 
+IT LETS YOU DOUBLEJUMP
+
+
+THIS IS A DASH PAD, 
+IT LETS YOU DASH MORE 
+THAN ONE TIME IN THE AIR"
+
+[node name="DashIcon" type="Sprite2D" parent="JumpAndDashPad"]
+position = Vector2(467, 406)
+scale = Vector2(3, 3)
+texture = ExtResource("3_2pmk5")
+
+[node name="JumpIcon" type="Sprite2D" parent="JumpAndDashPad"]
+position = Vector2(467, 317)
+scale = Vector2(3, 3)
+texture = ExtResource("4_1vsev")
+
+[node name="Spikes" type="Node" parent="."]
+
+[node name="SpikesLabel" type="RichTextLabel" parent="Spikes"]
+offset_left = 607.0
+offset_top = 383.0
+offset_right = 982.0
+offset_bottom = 454.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 24
+text = "THESE ARE SPIKES.
+DO NOT TOUCH THEM."
+
+[node name="Spike" type="Sprite2D" parent="Spikes"]
+position = Vector2(644, 327)
+scale = Vector2(5, 5)
+texture = ExtResource("5_8wpgk")
+
+[node name="Spike2" type="Sprite2D" parent="Spikes"]
+position = Vector2(724, 327)
+scale = Vector2(5, 5)
+texture = ExtResource("5_8wpgk")
+
+[node name="Spike3" type="Sprite2D" parent="Spikes"]
+position = Vector2(804, 327)
+scale = Vector2(5, 5)
+texture = ExtResource("5_8wpgk")
+
+[node name="Spike4" type="Sprite2D" parent="Spikes"]
+position = Vector2(884, 327)
+scale = Vector2(5, 5)
+texture = ExtResource("5_8wpgk")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="TimerLabel" type="RichTextLabel" parent="Timer"]
+offset_left = 472.0
+offset_top = 21.0
+offset_right = 887.0
+offset_bottom = 96.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 24
+text = "THIS IS A TIMER PICKUP. IT ADDS 10 SECONDS TO YOUR TIME"
+
+[node name="Timer" type="Sprite2D" parent="Timer"]
+position = Vector2(914, 56)
+scale = Vector2(3, 3)
+texture = ExtResource("6_830j8")
+
+[node name="Heart" type="Node" parent="."]
+
+[node name="HeartLabel" type="RichTextLabel" parent="Heart"]
+offset_left = 472.0
+offset_top = 185.0
+offset_right = 887.0
+offset_bottom = 260.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 24
+text = "THIS IS A HEART PICKUP. IT CAN REFILL YOUR LIVES"
+
+[node name="Heart" type="Sprite2D" parent="Heart"]
+position = Vector2(882, 223)
+scale = Vector2(3, 3)
+texture = ExtResource("7_6oe0h")
+
+[node name="Goal" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 476.0
+offset_right = 852.0
+offset_bottom = 551.0
+theme_override_fonts/normal_font = ExtResource("2_grxkj")
+theme_override_font_sizes/normal_font_size = 24
+text = "YOUR GOAL IS TO GET TO THE OTHER SIDE OF THE STAGE AS FAST AS POSSIBLE. GOOD LUCK!"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -74.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_grxkj")
+text = "BACK TO
+MAIN MENU"
+script = ExtResource("8_4lgfo")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8riyhh7x50sd"]
+[gd_scene load_steps=3 format=3 uid="uid://b8riyhh7x50sd"]
 
+[ext_resource type="Script" uid="uid://khi8ym0s3ji7" path="res://scripts/game_over.gd" id="1_f7a6i"]
 [ext_resource type="FontFile" uid="uid://dlx447tycm0rr" path="res://fonts/font1.png" id="1_mqkc1"]
 
 [node name="GameOver" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_f7a6i")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -86,3 +88,6 @@ theme_override_fonts/font = ExtResource("1_mqkc1")
 theme_override_font_sizes/font_size = 24
 text = "BACK TO
 TITLE"
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/BackToTitleButton" to="." method="_on_back_to_title_button_pressed"]

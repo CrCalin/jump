@@ -3,7 +3,7 @@ class_name Player
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var ghost_emitter: GhostEmitter = %GhostEmitter
-const ghost_scene: PackedScene = preload("uid://ddt05gpmv5elr")
+var ghost_scene: PackedScene = load("uid://ddt05gpmv5elr")
 
 const speed: float = 300.0
 const crouch_speed: float = 150.0

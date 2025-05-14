@@ -6,8 +6,8 @@ var lives: int = 3
 
 var hearts: Array[TextureRect] = []
 
-const full_heart_texture: Texture2D = preload("uid://dgktivuk8b8ri")
-const empty_heart_texture: Texture2D = preload("uid://b1imm8hqa7l17")
+var full_heart_texture: Texture2D = load("uid://dgktivuk8b8ri")
+var empty_heart_texture: Texture2D = load("uid://b1imm8hqa7l17")
 
 func _ready() -> void:
 	for i: int in range(max_lives):
