@@ -26,9 +26,9 @@ texture = ExtResource("1_hkmfp")
 [node name="Controls" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 41.0
-offset_top = 42.0
+offset_top = 23.0
 offset_right = 532.0
-offset_bottom = 240.0
+offset_bottom = 267.0
 theme_override_fonts/normal_font = ExtResource("2_grxkj")
 theme_override_font_sizes/normal_font_size = 24
 text = "CONTROLS:
@@ -37,7 +37,9 @@ text = "CONTROLS:
 
     S - CROUCH (OR SLIDE)
 
-SPACE - JUMP
+SPACE - JUMP (HOLD 
+     TO JUMP HIGHER)
+
     L - DASH
 "
 

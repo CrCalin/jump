@@ -10,7 +10,7 @@ const crouch_speed: float = 150.0
 const jump_velocity: float = -600.0
 const jump_release_velocity_cutoff: float = -200.0
 const dash_velocity: float = 600
-const max_speed: float = 2000
+const max_speed: Vector2 = Vector2(2000, 600)
 const dash_duration: float = 0.5 # in seconds
 var dash_deceleration: float:
 	get():
@@ -204,14 +204,14 @@ func do_dash(input_direction: Vector2, delta: float) -> void:
 	last_horizontal_direction = current_horizontal_direction
 
 func cap_speed() -> void:
-	if velocity.x > max_speed:
-		velocity.x = max_speed
-	if velocity.x < -max_speed:
-			velocity.x = - max_speed
-	if velocity.y > max_speed:
-			velocity.y = max_speed
-	if velocity.y < -max_speed:
-			velocity.y = - max_speed
+	if velocity.x > max_speed.x:
+		velocity.x = max_speed.x
+	if velocity.x < -max_speed.x:
+			velocity.x = - max_speed.x
+	if velocity.y > max_speed.y:
+			velocity.y = max_speed.y
+	if velocity.y < -max_speed.y:
+			velocity.y = - max_speed.y
 
 func flip_sprite_h() -> void:
 	if velocity.x < 0:

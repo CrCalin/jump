@@ -2,12 +2,15 @@ extends Node2D
 class_name Origin
 
 var stages: Array[PackedScene] = [
-	load("uid://cvohhxtn70wyt"),
-	#load("res://scenes/stages/stage2.tscn"),
+	load("uid://cvohhxtn70wyt"), # stage1.tscn
+	load("uid://vd84uqce1we8"), # stage2.tscn
+	load("uid://cwkv1hsfw0pxb"), # stage3.tscn
+	load("uid://cobws6lpellr1"), # stage4.tscn
+	load("uid://gj7k4blhtlj8"), # stage5.tscn
 ]
 
 func _process(delta: float) -> void:
-	debug_actions() # TODO: Remove this
+	#debug_actions() # TODO: Remove this
 
 	if transitioning:
 		if transition_time_left > 0:
@@ -31,6 +34,10 @@ func debug_actions() -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("reset_timer"):
 		(get_node("%Timer") as Timer).start(3)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_mask & MOUSE_BUTTON_RIGHT:
+		player.position = get_local_mouse_position()
 
 const game_size: Vector2i = Vector2i(1024, 576);
 
