@@ -1,12 +1,14 @@
-extends Timer
+extends CustomSpeedTimer
 
 @onready var text: RichTextLabel = $Text
 
 func _ready() -> void:
-	one_shot = true
+	#one_shot = true
 	start(30)
+	speed_multiplier_label.text = ""
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	super._process(delta)
 	set_color()
 	set_text()
 
@@ -47,3 +49,8 @@ func _on_pause_timer() -> void:
 
 func _on_resume_timer() -> void:
 	paused = false
+
+@onready var speed_multiplier_label: RichTextLabel = $SpeedMultiplier
+func _on_increment_time_multiplier() -> void:
+	speed += 0.1
+	speed_multiplier_label.text = "X%.1f" % speed

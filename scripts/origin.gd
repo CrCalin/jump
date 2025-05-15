@@ -10,7 +10,7 @@ var stages: Array[PackedScene] = [
 ]
 
 func _process(delta: float) -> void:
-	#debug_actions() # TODO: Remove this
+	debug_actions() # TODO: Remove this
 
 	if transitioning:
 		if transition_time_left > 0:
@@ -33,7 +33,10 @@ func debug_actions() -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("reset_timer"):
-		(get_node("%Timer") as Timer).start(3)
+		(get_node("%Timer") as CustomSpeedTimer).start(3)
+	if Input.is_action_just_pressed("increment_timer_speed"):
+		print("FUCK")
+		(get_node("%Timer") as CustomSpeedTimer)._on_increment_time_multiplier()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_mask & MOUSE_BUTTON_RIGHT:
@@ -137,4 +140,3 @@ func _on_game_over() -> void:
 	get_node("UILayer").add_child(game_over_object)
 
 # TODO: Add credits
-# TODO: Make levels!!!!
