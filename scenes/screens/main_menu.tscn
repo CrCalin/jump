@@ -111,5 +111,5 @@ text = "QUIT"
 
 [connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/AboutButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/AboutButton" to="." method="_on_about_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]
