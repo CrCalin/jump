@@ -138,5 +138,3 @@ func _on_game_over() -> void:
 	var game_over_object: Control = game_over_scene.instantiate()
 	(game_over_object.get_node("%ScoreLabel") as RichTextLabel).text = "SCORE: " + str((get_node("%ScoreLabel") as ScoreLabel).score)
 	get_node("UILayer").add_child(game_over_object)
-
-# TODO: Add credits

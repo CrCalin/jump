@@ -144,7 +144,7 @@ theme_override_fonts/normal_font = ExtResource("2_grxkj")
 theme_override_font_sizes/normal_font_size = 24
 text = "YOUR GOAL IS TO GET TO THE OTHER SIDE OF THE STAGE AS FAST AS POSSIBLE. GOOD LUCK!"
 
-[node name="Button" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -162,4 +162,4 @@ text = "BACK TO
 MAIN MENU"
 script = ExtResource("8_4lgfo")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
