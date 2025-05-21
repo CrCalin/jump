@@ -10,7 +10,8 @@ var stages: Array[PackedScene] = [
 ]
 
 func _process(delta: float) -> void:
-	debug_actions() # TODO: Remove this
+	if OS.is_debug_build():
+		debug_actions() # TODO: Remove this
 
 	if transitioning:
 		if transition_time_left > 0:
