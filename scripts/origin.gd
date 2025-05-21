@@ -13,6 +13,13 @@ func _process(delta: float) -> void:
 	if OS.is_debug_build():
 		debug_actions() # TODO: Remove this
 
+	if Input.is_action_just_pressed("fullscreen"):
+		var current_mode: DisplayServer.WindowMode = DisplayServer.window_get_mode()
+		if current_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 	if transitioning:
 		if transition_time_left > 0:
 			do_transition(delta)
@@ -27,16 +34,9 @@ func debug_actions() -> void:
 			Engine.time_scale = 1
 	if Input.is_action_just_pressed("reload"):
 		get_tree().change_scene_to_file("uid://b6wn33katc0y5")
-	if Input.is_action_just_pressed("fullscreen"):
-		var current_mode: DisplayServer.WindowMode = DisplayServer.window_get_mode()
-		if current_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if Input.is_action_just_pressed("reset_timer"):
 		(get_node("%Timer") as CustomSpeedTimer).start(3)
 	if Input.is_action_just_pressed("increment_timer_speed"):
-		print("FUCK")
 		(get_node("%Timer") as CustomSpeedTimer)._on_increment_time_multiplier()
 
 func _input(event: InputEvent) -> void:
